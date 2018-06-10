@@ -176,3 +176,8 @@ div.DTFC_LeftBodyWrapper tbody tr:first-child td {
 div.DTFC_LeftFootWrapper table {
 	border-top: none;
 }
+.dataTables_paginate.paging_bootstrap.pagination ul li{
+	display: inline;
+	float: left;
+	margin: 10px;
+}
