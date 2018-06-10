@@ -1,8 +1,8 @@
-function initialize(ltt,lng) {
+function initialize(ltt,lng,zip) {
 $("#slider").dateRangeSlider({
   defaultValues:{
     min: new Date(2018, 6, 10),
-    max: new Date(2018, 7, 10)
+    max: new Date(2018, 6, 17)
   }});
 $("#slider").dateRangeSlider("option",
   "bounds",
@@ -17,8 +17,10 @@ $("#slider").dateRangeSlider("option",
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 });
             var directionsService = new google.maps.DirectionsService();
-
+$('#zipCode').val(zip)
+$( "#slider" ).trigger( "valuesChanged" )
         }
+        $('#zipCode').on
 $(function () {
 
     var server = {
@@ -33,12 +35,12 @@ $(function () {
     var loction;
 
         loadAvailable([{'city':'WESTMINSTER',
-                'state':'MA','ltt':42.5267000,'lng':-71.8896000},{'city':'NORWALK',
-                'state':'CT','ltt':41.1265000,'lng':-73.3891200},{'city':'MANSFIELD',
-                'state':'MA','ltt':42.0352590,'lng':-71.2024260},{'city':'PROVIDENCE',
-                'state':'RI','ltt':41.8129730,'lng':-71.3654059},{'city':'DORAL',
-                'state':'FL','ltt':25.8302000,'lng':-80.3676000},{'city':'SPRINGFIELD',
-                'state':'VA','ltt':38.7914400,'lng':-77.2369800}])
+                'state':'MA','ltt':42.5267000,'lng':-71.8896000,'zip':'01473'},{'city':'NORWALK',
+                'state':'CT','ltt':41.1265000,'lng':-73.3891200,'zip':'06851'},{'city':'MANSFIELD',
+                'state':'MA','ltt':42.0352590,'lng':-71.2024260,'zip':'02048'},{'city':'PROVIDENCE',
+                'state':'RI','ltt':41.8129730,'lng':-71.3654059,'zip':'02914'},{'city':'DORAL',
+                'state':'FL','ltt':25.8302000,'lng':-80.3676000,'zip':'33178'},{'city':'SPRINGFIELD',
+                'state':'VA','ltt':38.7914400,'lng':-77.2369800,'zip':'22152'}])
         function loadAvailable(data) {
             var table = $('#availablePlaces');
             if (!$.fn.DataTable.fnIsDataTable(table[0])) {
@@ -52,7 +54,7 @@ $(function () {
                     "oLanguage": {"sSearch": '<i class="fa fa-search"></i>'},
                     "aoColumns": [{
                         "mData": function (d) {
-                            return "<div style='cursor:pointer' onclick=initialize('"+d.ltt+"','"+d.lng+"','$event')>"+ d.city +"</div>";
+                            return "<div style='cursor:pointer' onclick=initialize('"+d.ltt+"','"+d.lng+"','"+d.zip+"')>"+ d.city +"</div>";
                         },
                         "sDefaultContent": "-",
                     },
@@ -72,7 +74,7 @@ $(function () {
         }
 
     function loadLanes() {
-            initialize(37.4419, -122.1419);
+            initialize(41.1396100, -73.6052000,'06903');
 var categoryArray=[
 [
             'HARDWARE ACCESSORIES','BOX 18X12X13','BASE SINGLE DOOR',
@@ -102,14 +104,140 @@ var countArray = [
 [76,44,32,65,11,09,79,108,105,53],
 [109,103,102,55,46,32,12,14,15,21],
 [192,174,22,53,24,54,77,21,10,91]
-]
+];
+var retailerArray=[
+[
+{
+            name: 'Masco Cabinetry KM - Saint Loui',
+            y: 45,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'Masco Cabinetry KM - Minneapolis',
+            y: 25
+        }, {
+            name: 'Masco Cabinetry KM - Fife',
+            y: 15
+        },{name: 'Others',
+            y: 15
+        }],
+        [
+        {
+            name: 'Electrolux - Charlotte',
+            y: 55,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'JCPenney - Wallingford',
+            y: 15
+        }, {
+            name: 'GE MIAMI SDS ',
+            y: 15
+        },{name: 'Others',
+            y: 15
+        }],
+        [
+        {
+            name: 'Masco Cabinetry KM - Saint Loui',
+            y: 45,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'Masco Cabinetry KM - Minneapolis',
+            y: 25
+        }, {
+            name: 'Masco Cabinetry KM - Fife',
+            y: 15
+        },{name: 'Others',
+            y: 15
+        }],
+        [
+        {
+            name: 'MasterBrand - Atlanta',
+            y: 60,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'Masco Cabinetry KM - Minneapolis',
+            y: 25
+        },,{name: 'Others',
+            y: 15
+        }]]
 
 $("#slider").bind("valuesChanged", function(e, data){
 mainchart.series.data=countArray[Math.floor((Math.random() * 4) + 0)]
 mainchart.xAxis.categories=categoryArray[Math.floor((Math.random() * 4) + 0)]
 Highcharts.chart('mainChart', mainchart);
+Highcharts.chart('RetailerChart', retailerCharts);
 });
+var retailerCharts = {
 
+            chart: {
+                type: 'pie',
+                renderTo: 'RetailerChart',
+                style: {
+                    fontFamily: '-apple-system, BlinkMacSystemFont ! important;'
+                },
+                height: 400,
+                spacingBottom: 55
+            },
+
+            title: {
+                text: ''
+            },
+
+
+            credits: {
+                enabled: false
+            },
+
+            lang: {
+                noData: "No data to display under Test Execution Status",
+                loading: "Loading..."
+            },
+
+            tooltip: {
+                pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+            },
+
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    borderColor: null,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}: <b>{point.percentage:.1f}%</b>',
+                        distance: 20,
+                        colors: '#000',
+                        style: {
+                            color: 'black'
+                        }
+                    },
+                    showInLegend: true
+                },
+
+
+            series: [{
+                name: 'Test Execution Status',
+                colorByPoint: true,
+                data: [{
+            name: 'Masco Cabinetry KM - Saint Loui',
+            y: 45,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'Masco Cabinetry KM - Minneapolis',
+            y: 25
+        }, {
+            name: 'Masco Cabinetry KM - Fife',
+            y: 15
+        },{name: 'Others',
+            y: 15
+        }]
+            }]
+
+
+        };
     var mainchart = {
     chart: {
         type: 'column'
@@ -141,7 +269,7 @@ Highcharts.chart('mainChart', mainchart);
     tooltip: {
         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
         footerFormat: '</table>',
         shared: true,
         useHTML: true
@@ -150,14 +278,41 @@ Highcharts.chart('mainChart', mainchart);
         column: {
             pointPadding: 0.2,
             borderWidth: 0
-        }
+        },
+
+
+                point: {
+                    cursor: 'pointer',
+
+                    events: {
+                        click: function(e) {
+                            var clickedSeriesPoint = this.name
+                            retailerCharts.series.data=retailerArray[Math.floor((Math.random() * 3) + 0)]
+                            Highcharts.chart('RetailerChart', retailerCharts);
+
+                        },
+
+
+                    }
+                }
     },
     series: [{
         name: 'Demand Count',
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1]
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1],
+        events: {
+                        click: function(e) {
+                            var clickedSeriesPoint = this.name
+                            retailerCharts.series.data=[];
+                            retailerCharts.series.data=retailerArray[Math.floor((Math.random() * 3) + 0)]
+                            Highcharts.chart('RetailerChart', retailerCharts);
 
+                        },
+
+
+                    }
     }]
 };
+
     Highcharts.chart('mainChart', mainchart);
 
     }
