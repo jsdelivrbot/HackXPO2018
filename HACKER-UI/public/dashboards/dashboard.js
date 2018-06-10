@@ -1,5 +1,15 @@
 function initialize(ltt,lng) {
-$("#slider").dateRangeSlider();
+$("#slider").dateRangeSlider({
+  defaultValues:{
+    min: new Date(2018, 6, 10),
+    max: new Date(2018, 7, 10)
+  }});
+$("#slider").dateRangeSlider("option",
+  "bounds",
+  {
+    min: new Date(2018, 6, 10),
+    max: new Date(2018, 7, 10)
+});
             var map = new google.maps.Map(
                 document.getElementById("map_canvas"), {
                     center: new google.maps.LatLng(ltt,lng),
@@ -19,13 +29,6 @@ $(function () {
         analytics: 'localhost:8080'
     };
 
-    var lanes = [];
-    var carriers = [];
-    var currentLane;
-    var currentCarrier;
-    var currentCarrierId;
-    var currentTruckId;
-    var currentAlgorithm;
 
     var loction;
 
@@ -70,7 +73,8 @@ $(function () {
 
     function loadLanes() {
             initialize(37.4419, -122.1419);
-var categoryArray=[[
+var categoryArray=[
+[
             'HARDWARE ACCESSORIES','BOX 18X12X13','BASE SINGLE DOOR',
             'MOLDING PLANT 2','UV PANELS','AA BOX','BASE BASE DRAWER','SmlBox/Env/Vendor',
             'BOX 14X12X6','RANGE ACCY'
@@ -79,40 +83,59 @@ var categoryArray=[[
             'MOLDING PLANT 2','BOX 14X12X6','AA BOX','BASE BASE DRAWER',
             ,
         ],[
-            'HARDWARE ACCESSORIES','BOX 18X12X13','BASE SINGLE DOOR',
+            'RANGE ACCY','HARDWARE ACCESSORIES','BOX 18X12X13','BASE SINGLE DOOR','BASE BASE DRAWER',
+            'MOLDING PLANT 2','AA BOX','SmlBox/Env/Vendor',
+            'BOX 14X12X6','UV PANELS'
+        ],[
+            'VANITY BASE DRAWER','BOX 18X12X13','BASE SINGLE DOOR',
             'MOLDING PLANT 2','UV PANELS','AA BOX','BASE BASE DRAWER','SmlBox/Env/Vendor',
             'BOX 14X12X6','RANGE ACCY'
         ],[
             'HARDWARE ACCESSORIES','BOX 18X12X13','BASE SINGLE DOOR',
             'MOLDING PLANT 2','UV PANELS','AA BOX','BASE BASE DRAWER','SmlBox/Env/Vendor',
             'BOX 14X12X6','RANGE ACCY'
-        ],[
-            'HARDWARE ACCESSORIES','BOX 18X12X13','BASE SINGLE DOOR',
-            'MOLDING PLANT 2','UV PANELS','AA BOX','BASE BASE DRAWER','SmlBox/Env/Vendor',
-            'BOX 14X12X6','RANGE ACCY'
-        ],]
-    Highcharts.chart('mainChart', {
+        ]]
+
+var countArray = [
+[60,88,12,35,13,15,76,87,65,17],
+[55,76,82,15,23,41,67,95,106,78],
+[76,44,32,65,11,09,79,108,105,53],
+[109,103,102,55,46,32,12,14,15,21],
+[192,174,22,53,24,54,77,21,10,91]
+]
+
+$("#slider").bind("valuesChanged", function(e, data){
+mainchart.series.data=countArray[Math.floor((Math.random() * 4) + 0)]
+mainchart.xAxis.categories=categoryArray[Math.floor((Math.random() * 4) + 0)]
+Highcharts.chart('mainChart', mainchart);
+});
+
+    var mainchart = {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Monthly Average Rainfall'
+        text: 'Demand Predictions:'
     },
     subtitle: {
-        text: 'Source: WorldClimate.com'
+        text: 'Shows the predictions for the selected time'
     },
     xAxis: {
-        categories: [
+        categories:[
             'HARDWARE ACCESSORIES','BOX 18X12X13','BASE SINGLE DOOR',
             'MOLDING PLANT 2','UV PANELS','AA BOX','BASE BASE DRAWER','SmlBox/Env/Vendor',
-            'BOX 14X12X6','RANGE ACCY'
-        ],
-        crosshair: true
+            'BOX 14X12X6','RANGE ACCY'],
+        crosshair: true,
+        labels: {
+                rotation: -45,
+                align: 'right'
+
+            }
     },
     yAxis: {
         min: 0,
         title: {
-            text: 'Rainfall (mm)'
+            text: ''
         }
     },
     tooltip: {
@@ -130,13 +153,14 @@ var categoryArray=[[
         }
     },
     series: [{
-        name: 'Tokyo',
+        name: 'Demand Count',
         data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1]
 
     }]
-});
+};
+    Highcharts.chart('mainChart', mainchart);
 
-        }
+    }
 
 
     var dailyPredicition = {};
@@ -151,95 +175,6 @@ var categoryArray=[[
         var test = (Math.round(n) / multiplicator);
         return +(test.toFixed(digits));
     }
-
-    var oTable;
-
-    function drawArima(carrierId, equipment) {
-        {
-
-
-            y = [];
-            var k = -10;
-            for (i = 1; i < 31; i++) {
-
-                var monthNames = ["Jan", "Feb", "Ma", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                var d = new Date(new Date().getTime() + ((++k) * 24 * 60 * 60 * 1000));
-                y.push(monthNames[d.getMonth()] + " " + d.getDate())
-
-            }
-
-            var colors = [];
-            for (i = 1; i < 11; i++)
-                colors.push("#000")
-            for (i = 11; i < 31; i++)
-                colors.push("#00f60a")
-
-         }
-    }
-
-
-    function getArima() {
-
-        y = [];
-        var k = -10;
-        for (i = 1; i < 31; i++) {
-
-            var monthNames = ["Jan", "Feb", "Ma", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            var d = new Date(new Date().getTime() + ((++k) * 24 * 60 * 60 * 1000));
-            y.push(monthNames[d.getMonth()] + " " + d.getDate())
-
-        }
-
-        $.ajax({
-            url: 'http://' + server.localApi + '/resource/xpo/getPredictedTotalCost',
-            type: 'POST',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({lane: currentLane.Lane}),
-            success: function (totalCost) {
-                $.ajax({
-                    url: 'http://' + server.localApi + '/resource/xpo/getPredictedTotalRevenue',
-                    type: 'POST',
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({lane: currentLane.Lane}),
-
-
-                    success: function (totalRevenue) {
-
-                        drawChart('ARIMA Forecast', 'Day → ', 'Cost($)', "arima_canvas",
-
-                            [
-
-
-                                {
-                                    name: "Total Revenue",
-                                    x: y,
-                                    y: totalRevenue.split(","),
-                                    //color: ["#000", "#f00", "f20"],
-                                    lineColor: "green"
-
-                                },
-                                {
-                                    name: "Total Cost",
-                                    x: y,
-                                    y: totalCost.split(","),
-                                    //color: ["#71aa47", "#00aaaa", "a70"],
-                                    lineColor: "red"
-
-                                },
-
-
-                            ]);
-
-
-
-                    }
-                });
-
-
-            }
-        });
-    }
-
 
     function getBestFitCarrierList(fnCallback, fnUpdateCallback) {
 
