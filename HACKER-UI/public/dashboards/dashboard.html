@@ -55,6 +55,11 @@
     <script src="gauge.js"></script>
     <script src="chart.bundle.js"></script>
     <link  href="datepicker.css" rel="stylesheet">
+     <script src="./highcharts/highcharts.js"></script>
+    <script src="./highcharts/data.js"></script>
+    <script src="./highcharts/drilldown.js"></script>
+    <script src="./highcharts/no-data-to-display.js"></script>
+    <script src="./highcharts/custom_events.js"></script>
     <link  href="iThing-min.css" rel="stylesheet">
     <script src="datepicker.min.js"></script>
     	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -210,61 +215,8 @@
                 </div><!--end .row -->
 <div class="row">
 
-                    <!-- BEGIN TODOS -->
-                    <div class="col-md-3">
-                        <div class="card" style="background-color: #e2f9f7;">
-                            <div class="card-head">
-                                <header>Influencing Factors</header>
-                                <div class="tools">
-                                    <a class="btn btn-icon-toggle btn-close"><i class="md md-close"></i></a>
-                                </div>
-                            </div><!--end .card-head -->
-                            <div class="card-body no-padding height-9 scroll">
-                                <div id="formButn" class="formClass"></div>
-                                <br>
-                                <div class="formClass btn-group">
-                                    <button type="button" value="" class="btn ink-reaction btn-flat dropdown-toggle"
-                                            data-toggle="dropdown">
-                                        <span id='carrierss'>Select Carrier</span> <i
-                                            class="fa fa-caret-down text-default-light"></i>
-                                    </button>
-                                    <ul class="dropdown-menu animation-expand carierlists" role="menu">
-                                    </ul>
-                                </div>
-                                <br>
-                                <br>
-                                <div class="formClass btn-group">
-                                    <button type="button" class="btn ink-reaction btn-flat dropdown-toggle"
-                                            data-toggle="dropdown">
-                                        <span id='truckss'>Select Truck</span> <i
-                                            class="fa fa-caret-down text-default-light"></i>
-                                    </button>
-                                    <ul class="dropdown-menu animation-expand trucklists" role="menu">
-
-                                    </ul>
-                                </div>
-                                <br>
-                                <div class="formClass form-group">
-                                    <span>
-                                        <label for="fuelPrice"
-                                               style="font-size: 15px;padding-top: 10px;padding-left: 10px;font-weight: 500;">Fuel Price:</label>
-                                        <input placeholder="Fuel Price"
-                                               style="        width: 50%;display: inline;margin-left: 10px;" type="text"
-                                               class="form-control" id="fuelPrice"></span>
-
-                                </div>
-                                <br>
-
- <button type="button" class="btn ink-reaction btn-raised btn-primary" id="submit">
-                                    Submit
-                                </button>
-                            </div><!--end .card-body -->
-                        </div><!--end .card -->
-                    </div><!--end .col -->
-                    <!-- END TODOS -->
-
                     <!-- BEGIN REGISTRATION HISTORY -->
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-head">
                                 <header>Accuracy Tester</header>
@@ -277,7 +229,10 @@
                             <div class="card-body no-padding height-9">
 
 
-                                <canvas id="myGraphChart" width="343" height="343"></canvas>
+                                <div id="mainChart" width="343" height="343">
+
+
+                                </div>
 
 
                             </div><!--end .card-body -->
@@ -894,7 +849,6 @@
 <script src="../../assets/js/modules/materialadmin/libs/rickshaw/rickshaw.min.js"></script>
 <script src="../../assets/js/modules/materialadmin/core/cache/63d0445130d69b2868a8d28c93309746.js"></script>
 <script src="../../assets/js/modules/materialadmin/core/demo/Demo.js"></script>
-<script src="../../assets/js/modules/materialadmin/core/demo/DemoDashboard.js"></script>
 
 
 <!-- END JAVASCRIPT -->
