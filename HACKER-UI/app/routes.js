@@ -37,8 +37,52 @@ if (!fs.existsSync(logDir)) {
 
 
 module.exports = function (app) {
- 
 
+
+    baseRoute.get('/get-data-csv', function(req, res) {
+        res.setHeader('Content-Type', 'application/json');
+        var csv = require("fast-csv");
+        var dataArray=[];
+
+        csv
+            .fromPath("csv/xpo.csv")
+            .on("data", function(data){
+                data= data.map(function (d) {
+                    return d.replace("'","").replace("'","").trim();
+                });
+                if(data[0].length>0)
+                dataArray.push({
+                    jcount:data[0],
+                    date:data[1],
+                    src:data[2],
+                    to:data[3],
+                    zip:data[4],
+                    desc:data[5],
+                    c:data[6]
+                });
+              })
+            .on("end", function(){
+                res.setHeader('Content-Type', 'application/json');
+                res.send(dataArray);
+            });
+
+
+    });
+
+
+
+    baseRoute.get('/get-estimate-data', function(req, res) {
+            res.setHeader('Content-Type', 'application/json');
+            res.send([{
+                rank:0,
+                name:"Fridge",
+                retailers:[{rank:0,name:"Q",count:10},{rank:1,name:"R",count:4}],
+                average:30,
+                count:10,
+                trendLastMonths:[20,33,7,44,66,33,22,55,77,55,77,66]
+            }]);
+    }
+    );
     app.use('/', baseRoute); // mount the sub app
 
 };
