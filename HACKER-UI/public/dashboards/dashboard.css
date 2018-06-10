@@ -1,0 +1,61 @@
+.lane-selector .tile{
+
+    cursor: pointer;
+}
+
+.lane-selector .tile.selected{
+     background-color: #f9d7d7;
+ }
+#map_canvas{
+    height: 400px;
+}
+.display_none{
+    display: none;
+}
+
+.small-box{
+    z-index: 1046;
+    color: #000;
+    font-size: 13px;
+    width: 100%;
+    display: inline-block;
+    text-align: right;
+    opacity: 1 !important;
+}
+
+
+.carierlist  {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 12px 0;
+    font-size: 16px;
+    width: 100%;
+}
+.carierlist  {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 12px 0;
+    font-size: 16px;
+    width: 100%;
+}
+.formClass{
+    margin-left: 10px;
+}
+button#submit {
+    margin-left: 35%;
+}
+#myGraphChart{
+    height: 343px;!important;
+
+}
+.xptitle{
+    color: #232323;
+    font-size: 21px;
+    line-height: 26px;
+    padding-left: 5px;
+    font-weight: 900;
+}
+
+.avoid-clicks {
+    pointer-events: none;
+}
