@@ -1,0 +1,4 @@
+
+Import from Json backup
+
+mongoimport --db CICD-Dashboard --collection AppleDashboard C:\Mongo_backup\backup.json 
