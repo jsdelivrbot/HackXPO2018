@@ -89,10 +89,11 @@ if(data)
                     contentType: "application/json; charset=utf-8",
                     success: function (predictedData) {
 
+                    //copy paste the contents inside "FROM HERE-TO HERE"
 
                     }
                 });*/
-
+/****************FROM HERE ************/
  predictedData = {
   "products": {
     "'19-25 REFRIGERATOR - CRATED '": {
@@ -441,12 +442,10 @@ predictedData.result.forEach(function(predictedItem){
 categoryArray.push(predictedItem.product)
 countArray.push(parseInt(predictedItem.value))
 })
-//mainchart.series.data=countArray[Math.floor((Math.random() * 4) + 0)]
 mainchart.series[0].data=countArray;
-//mainchart.xAxis.categories=categoryArray[Math.floor((Math.random() * 4) + 0)]
 mainchart.xAxis.categories=categoryArray;
 Highcharts.chart('mainChart', mainchart);
-//Highcharts.chart('RetailerChart', retailerCharts);
+/****************TO HERE*****************/
 });
     var retailerCharts = {
 
@@ -524,7 +523,7 @@ Highcharts.chart('mainChart', mainchart);
         text: 'Demand Predictions:'
     },
     subtitle: {
-        text: 'Shows the predictions for the selected time'
+        text: 'Click the bars to see retail distribution'
     },
     xAxis: {
         categories:[
