@@ -1,0 +1,345 @@
+// 20180614145836
+// http://127.0.0.1:5000/svm?zipcode=33178&month=7
+
+{
+  "products": {
+    "'19-25 REFRIGERATOR - CRATED '": {
+      "'GE MIAMI '": "9",
+      "'GE MIAMI SDS '": "8"
+    },
+    "'19-25 REFRIGERATOR - UNCRATED '": {
+      "'GE MIAMI '": "8",
+      "'GE MIAMI SDS '": "7"
+    },
+    "'DLEX8000V'": {
+      "'GE MIAMI '": "9",
+      "'GE MIAMI SDS '": "9"
+    },
+    "'FFFH21F4QW'": {
+      "'GE MIAMI '": "1",
+      "'GE MIAMI SDS '": "1"
+    },
+    "'JVM6172DFWW'": {
+      "'GE MIAMI '": "3",
+      "'GE MIAMI SDS '": "3"
+    },
+    "'LFXS29626S'": {
+      "'GE MIAMI '": "3",
+      "'GE MIAMI SDS '": "2"
+    },
+    "'MEDIUM - CRATED '": {
+      "'GE MIAMI '": "2",
+      "'GE MIAMI SDS '": "0"
+    },
+    "'MEDIUM - UNCRATED '": {
+      "'GE MIAMI '": "2",
+      "'GE MIAMI SDS '": "0"
+    },
+    "'PB911SJSS'": {
+      "'GE MIAMI '": "3",
+      "'GE MIAMI SDS '": "1"
+    },
+    "'PCR06WATSS'": {
+      "'GE MIAMI '": "5",
+      "'GE MIAMI SDS '": "3"
+    },
+    "'PDT750SSFSS'": {
+      "'GE MIAMI '": "8",
+      "'GE MIAMI SDS '": "6"
+    },
+    "'PEB9159SFSS'": {
+      "'GE MIAMI '": "0",
+      "'GE MIAMI SDS '": "9"
+    },
+    "'PFE28RSHSS'": {
+      "'GE MIAMI '": "2",
+      "'GE MIAMI SDS '": "0"
+    },
+    "'PVM9179SFSS'": {
+      "'GE MIAMI '": "2",
+      "'GE MIAMI SDS '": "1"
+    },
+    "'WDT720PADM'": {
+      "'GE MIAMI '": "2",
+      "'GE MIAMI SDS '": "0"
+    },
+    "'WED72HEDW'": {
+      "'GE MIAMI '": "0",
+      "'GE MIAMI SDS '": "8"
+    },
+    "'WFW72HEDW'": {
+      "'GE MIAMI '": "6",
+      "'GE MIAMI SDS '": "4"
+    },
+    "'WX9X19'": {
+      "'GE MIAMI '": "2",
+      "'GE MIAMI SDS '": "9"
+    },
+    "'ZDOD240HSS'": {
+      "'GE MIAMI '": "9",
+      "'GE MIAMI SDS '": "7"
+    },
+    "'ZGG420NBPSS'": {
+      "'GE MIAMI '": "9",
+      "'GE MIAMI SDS '": "8"
+    },
+    "'ZGU122NPSS'": {
+      "'GE MIAMI '": "2",
+      "'GE MIAMI SDS '": "1"
+    }
+  },
+  "result": [
+    {
+      "client": "'GE MIAMI '",
+      "product": "'JVM6172DFWW'",
+      "value": "3",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'JVM6172DFWW'",
+      "value": "3",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'DLEX8000V'",
+      "value": "9",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'DLEX8000V'",
+      "value": "9",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'19-25 REFRIGERATOR - CRATED '",
+      "value": "9",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'19-25 REFRIGERATOR - CRATED '",
+      "value": "8",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'19-25 REFRIGERATOR - UNCRATED '",
+      "value": "8",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'19-25 REFRIGERATOR - UNCRATED '",
+      "value": "7",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'MEDIUM - CRATED '",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'MEDIUM - CRATED '",
+      "value": "0",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'MEDIUM - UNCRATED '",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'MEDIUM - UNCRATED '",
+      "value": "0",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'PCR06WATSS'",
+      "value": "5",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'PCR06WATSS'",
+      "value": "3",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'WX9X19'",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'WX9X19'",
+      "value": "9",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'ZDOD240HSS'",
+      "value": "9",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'ZDOD240HSS'",
+      "value": "7",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'ZGG420NBPSS'",
+      "value": "9",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'ZGG420NBPSS'",
+      "value": "8",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'ZGU122NPSS'",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'ZGU122NPSS'",
+      "value": "1",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'LFXS29626S'",
+      "value": "3",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'LFXS29626S'",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'FFFH21F4QW'",
+      "value": "1",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'FFFH21F4QW'",
+      "value": "1",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'WDT720PADM'",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'WDT720PADM'",
+      "value": "0",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'PB911SJSS'",
+      "value": "3",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'PB911SJSS'",
+      "value": "1",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'PDT750SSFSS'",
+      "value": "8",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'PDT750SSFSS'",
+      "value": "6",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'PFE28RSHSS'",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'PFE28RSHSS'",
+      "value": "0",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'PVM9179SFSS'",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'PVM9179SFSS'",
+      "value": "1",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'WED72HEDW'",
+      "value": "0",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'WED72HEDW'",
+      "value": "8",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'WFW72HEDW'",
+      "value": "6",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'WFW72HEDW'",
+      "value": "4",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'PEB9159SFSS'",
+      "value": "0",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'PEB9159SFSS'",
+      "value": "9",
+      "zipcode": "33178"
+    }
+  ]
+}
