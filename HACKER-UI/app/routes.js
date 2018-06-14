@@ -71,6 +71,17 @@ module.exports = function (app) {
 
 
 
+    baseRoute.get('/getcities', function(req, res) {
+            res.setHeader('Content-Type', 'application/json');
+            res.send([{'city':'WESTMINSTER',
+                'state':'MA','ltt':42.5267000,'lng':-71.8896000,'zip':'01473'},{'city':'NORWALK',
+                'state':'CT','ltt':41.1265000,'lng':-73.3891200,'zip':'06851'},{'city':'MANSFIELD',
+                'state':'MA','ltt':42.0352590,'lng':-71.2024260,'zip':'02048'},{'city':'PROVIDENCE',
+                'state':'RI','ltt':41.8129730,'lng':-71.3654059,'zip':'02914'},{'city':'DORAL',
+                'state':'FL','ltt':25.8302000,'lng':-80.3676000,'zip':'33178'},{'city':'SPRINGFIELD',
+                'state':'VA','ltt':38.7914400,'lng':-77.2369800,'zip':'22152'}]);
+});
+
     baseRoute.get('/get-estimate-data', function(req, res) {
             res.setHeader('Content-Type', 'application/json');
             res.send([{

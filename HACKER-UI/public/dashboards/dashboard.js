@@ -1,15 +1,18 @@
+var sliderDate=null;
+var predictedData =null;
 function initialize(ltt,lng,zip) {
 $("#slider").dateRangeSlider({
   defaultValues:{
-    min: new Date(2018, 6, 10),
-    max: new Date(2018, 6, 17)
-  }});
-$("#slider").dateRangeSlider("option",
-  "bounds",
-  {
-    min: new Date(2018, 6, 10),
-    max: new Date(2018, 7, 10)
-});
+    min: new Date(2018, 1, 1),
+    max: new Date(2018, 1, 31)
+  },
+  step:{ months:1},
+  bounds:{
+    min: new Date(2018, 1, 1),
+    max: new Date(2018, 12, 31)
+    }
+  });
+
             var map = new google.maps.Map(
                 document.getElementById("map_canvas"), {
                     center: new google.maps.LatLng(ltt,lng),
@@ -20,28 +23,26 @@ $("#slider").dateRangeSlider("option",
 $('#zipCode').val(zip)
 $( "#slider" ).trigger( "valuesChanged" )
         }
-        $('#zipCode').on
 $(function () {
 
     var server = {
         //localApi: 'tvmatp209261l:9002',
         //analytics:'tvmatp209261l:8080'
         // localApi: 'tvmatp95669l:9002',
-        localApi: 'localhost:9002',
+        localApi: 'localhost:9999',
         analytics: 'localhost:8080'
     };
 
+        loadAvailable();
 
-    var loction;
 
-        loadAvailable([{'city':'WESTMINSTER',
-                'state':'MA','ltt':42.5267000,'lng':-71.8896000,'zip':'01473'},{'city':'NORWALK',
-                'state':'CT','ltt':41.1265000,'lng':-73.3891200,'zip':'06851'},{'city':'MANSFIELD',
-                'state':'MA','ltt':42.0352590,'lng':-71.2024260,'zip':'02048'},{'city':'PROVIDENCE',
-                'state':'RI','ltt':41.8129730,'lng':-71.3654059,'zip':'02914'},{'city':'DORAL',
-                'state':'FL','ltt':25.8302000,'lng':-80.3676000,'zip':'33178'},{'city':'SPRINGFIELD',
-                'state':'VA','ltt':38.7914400,'lng':-77.2369800,'zip':'22152'}])
         function loadAvailable(data) {
+        $.ajax({
+                    url: 'http://' + server.localApi + '/getcities',
+                    type: 'GET',
+                    contentType: "application/json; charset=utf-8",
+                    success: function (tableData) {
+
             var table = $('#availablePlaces');
             if (!$.fn.DataTable.fnIsDataTable(table[0])) {
                 table.dataTable({
@@ -50,7 +51,7 @@ $(function () {
                     "bPaginate": false,
                     "ordering": false,
                     "bAutoWidth": false,
-                    "aaData": data,
+                    "aaData": tableData,
                     "oLanguage": {"sSearch": '<i class="fa fa-search"></i>'},
                     "aoColumns": [{
                         "mData": function (d) {
@@ -69,108 +70,385 @@ $(function () {
                 });
             } else {
                 table.dataTable().fnDestroy();
-                $scope.loadDocumentHistory(data);
             }
+                    }
+                });
         }
 
-    function loadLanes() {
+    function loadData() {
             initialize(41.1396100, -73.6052000,'06903');
-var categoryArray=[
-[
-            'HARDWARE ACCESSORIES','BOX 18X12X13','BASE SINGLE DOOR',
-            'MOLDING PLANT 2','UV PANELS','AA BOX','BASE BASE DRAWER','SmlBox/Env/Vendor',
-            'BOX 14X12X6','RANGE ACCY'
-        ],[
-            'SmlBox/Env/Vendor','HARDWARE ACCESSORIES','UV PANELS','BOX 18X12X13','RANGE ACCY','BASE SINGLE DOOR',
-            'MOLDING PLANT 2','BOX 14X12X6','AA BOX','BASE BASE DRAWER',
-            ,
-        ],[
-            'RANGE ACCY','HARDWARE ACCESSORIES','BOX 18X12X13','BASE SINGLE DOOR','BASE BASE DRAWER',
-            'MOLDING PLANT 2','AA BOX','SmlBox/Env/Vendor',
-            'BOX 14X12X6','UV PANELS'
-        ],[
-            'VANITY BASE DRAWER','BOX 18X12X13','BASE SINGLE DOOR',
-            'MOLDING PLANT 2','UV PANELS','AA BOX','BASE BASE DRAWER','SmlBox/Env/Vendor',
-            'BOX 14X12X6','RANGE ACCY'
-        ],[
-            'HARDWARE ACCESSORIES','BOX 18X12X13','BASE SINGLE DOOR',
-            'MOLDING PLANT 2','UV PANELS','AA BOX','BASE BASE DRAWER','SmlBox/Env/Vendor',
-            'BOX 14X12X6','RANGE ACCY'
-        ]]
 
-var countArray = [
-[60,88,12,35,13,15,76,87,65,17],
-[55,76,82,15,23,41,67,95,106,78],
-[76,44,32,65,11,09,79,108,105,53],
-[109,103,102,55,46,32,12,14,15,21],
-[192,174,22,53,24,54,77,21,10,91]
-];
-var retailerArray=[
-[
-{
-            name: 'Masco Cabinetry KM - Saint Loui',
-            y: 45,
-            sliced: true,
-            selected: true
-        }, {
-            name: 'Masco Cabinetry KM - Minneapolis',
-            y: 25
-        }, {
-            name: 'Masco Cabinetry KM - Fife',
-            y: 15
-        },{name: 'Others',
-            y: 15
-        }],
-        [
-        {
-            name: 'Electrolux - Charlotte',
-            y: 55,
-            sliced: true,
-            selected: true
-        }, {
-            name: 'JCPenney - Wallingford',
-            y: 15
-        }, {
-            name: 'GE MIAMI SDS ',
-            y: 15
-        },{name: 'Others',
-            y: 15
-        }],
-        [
-        {
-            name: 'Masco Cabinetry KM - Saint Loui',
-            y: 45,
-            sliced: true,
-            selected: true
-        }, {
-            name: 'Masco Cabinetry KM - Minneapolis',
-            y: 25
-        }, {
-            name: 'Masco Cabinetry KM - Fife',
-            y: 15
-        },{name: 'Others',
-            y: 15
-        }],
-        [
-        {
-            name: 'MasterBrand - Atlanta',
-            y: 60,
-            sliced: true,
-            selected: true
-        }, {
-            name: 'Masco Cabinetry KM - Minneapolis',
-            y: 25
-        },,{name: 'Others',
-            y: 15
-        }]]
 
 $("#slider").bind("valuesChanged", function(e, data){
-mainchart.series.data=countArray[Math.floor((Math.random() * 4) + 0)]
-mainchart.xAxis.categories=categoryArray[Math.floor((Math.random() * 4) + 0)]
+//call api to Predict
+if(data)
+ sliderDate = new Date(data.values.max)
+/*$.ajax({
+                    url: 'http://' + server.localApi + '/svm?zipcode='+$('#zipCode').val+'&month='+sliderDate.getMonth()+1,
+                    type: 'GET',
+                    contentType: "application/json; charset=utf-8",
+                    success: function (predictedData) {
+
+
+                    }
+                });*/
+
+ predictedData = {
+  "products": {
+    "'19-25 REFRIGERATOR - CRATED '": {
+      "'GE MIAMI '": "9",
+      "'GE MIAMI SDS '": "8"
+    },
+    "'19-25 REFRIGERATOR - UNCRATED '": {
+      "'GE MIAMI '": "8",
+      "'GE MIAMI SDS '": "7"
+    },
+    "'DLEX8000V'": {
+      "'GE MIAMI '": "9",
+      "'GE MIAMI SDS '": "9"
+    },
+    "'FFFH21F4QW'": {
+      "'GE MIAMI '": "1",
+      "'GE MIAMI SDS '": "1"
+    },
+    "'JVM6172DFWW'": {
+      "'GE MIAMI '": "3",
+      "'GE MIAMI SDS '": "3"
+    },
+    "'LFXS29626S'": {
+      "'GE MIAMI '": "3",
+      "'GE MIAMI SDS '": "2"
+    },
+    "'MEDIUM - CRATED '": {
+      "'GE MIAMI '": "2",
+      "'GE MIAMI SDS '": "0"
+    },
+    "'MEDIUM - UNCRATED '": {
+      "'GE MIAMI '": "2",
+      "'GE MIAMI SDS '": "0"
+    },
+    "'PB911SJSS'": {
+      "'GE MIAMI '": "3",
+      "'GE MIAMI SDS '": "1"
+    },
+    "'PCR06WATSS'": {
+      "'GE MIAMI '": "5",
+      "'GE MIAMI SDS '": "3"
+    },
+    "'PDT750SSFSS'": {
+      "'GE MIAMI '": "8",
+      "'GE MIAMI SDS '": "6"
+    },
+    "'PEB9159SFSS'": {
+      "'GE MIAMI '": "0",
+      "'GE MIAMI SDS '": "9"
+    },
+    "'PFE28RSHSS'": {
+      "'GE MIAMI '": "2",
+      "'GE MIAMI SDS '": "0"
+    },
+    "'PVM9179SFSS'": {
+      "'GE MIAMI '": "2",
+      "'GE MIAMI SDS '": "1"
+    },
+    "'WDT720PADM'": {
+      "'GE MIAMI '": "2",
+      "'GE MIAMI SDS '": "0"
+    },
+    "'WED72HEDW'": {
+      "'GE MIAMI '": "0",
+      "'GE MIAMI SDS '": "8"
+    },
+    "'WFW72HEDW'": {
+      "'GE MIAMI '": "6",
+      "'GE MIAMI SDS '": "4"
+    },
+    "'WX9X19'": {
+      "'GE MIAMI '": "2",
+      "'GE MIAMI SDS '": "9"
+    },
+    "'ZDOD240HSS'": {
+      "'GE MIAMI '": "9",
+      "'GE MIAMI SDS '": "7"
+    },
+    "'ZGG420NBPSS'": {
+      "'GE MIAMI '": "9",
+      "'GE MIAMI SDS '": "8"
+    },
+    "'ZGU122NPSS'": {
+      "'GE MIAMI '": "2",
+      "'GE MIAMI SDS '": "1"
+    }
+  },
+  "result": [
+    {
+      "client": "'GE MIAMI '",
+      "product": "'JVM6172DFWW'",
+      "value": "3",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'JVM6172DFWW'",
+      "value": "3",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'DLEX8000V'",
+      "value": "9",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'DLEX8000V'",
+      "value": "9",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'19-25 REFRIGERATOR - CRATED '",
+      "value": "9",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'19-25 REFRIGERATOR - CRATED '",
+      "value": "8",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'19-25 REFRIGERATOR - UNCRATED '",
+      "value": "8",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'19-25 REFRIGERATOR - UNCRATED '",
+      "value": "7",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'MEDIUM - CRATED '",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'MEDIUM - CRATED '",
+      "value": "0",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'MEDIUM - UNCRATED '",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'MEDIUM - UNCRATED '",
+      "value": "0",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'PCR06WATSS'",
+      "value": "5",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'PCR06WATSS'",
+      "value": "3",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'WX9X19'",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'WX9X19'",
+      "value": "9",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'ZDOD240HSS'",
+      "value": "9",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'ZDOD240HSS'",
+      "value": "7",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'ZGG420NBPSS'",
+      "value": "9",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'ZGG420NBPSS'",
+      "value": "8",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'ZGU122NPSS'",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'ZGU122NPSS'",
+      "value": "1",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'LFXS29626S'",
+      "value": "3",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'LFXS29626S'",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'FFFH21F4QW'",
+      "value": "1",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'FFFH21F4QW'",
+      "value": "1",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'WDT720PADM'",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'WDT720PADM'",
+      "value": "0",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'PB911SJSS'",
+      "value": "3",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'PB911SJSS'",
+      "value": "1",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'PDT750SSFSS'",
+      "value": "8",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'PDT750SSFSS'",
+      "value": "6",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'PFE28RSHSS'",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'PFE28RSHSS'",
+      "value": "0",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'PVM9179SFSS'",
+      "value": "2",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'PVM9179SFSS'",
+      "value": "1",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'WED72HEDW'",
+      "value": "0",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'WED72HEDW'",
+      "value": "8",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'WFW72HEDW'",
+      "value": "6",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'WFW72HEDW'",
+      "value": "4",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI '",
+      "product": "'PEB9159SFSS'",
+      "value": "0",
+      "zipcode": "33178"
+    },
+    {
+      "client": "'GE MIAMI SDS '",
+      "product": "'PEB9159SFSS'",
+      "value": "9",
+      "zipcode": "33178"
+    }
+  ]
+}
+var categoryArray=[],countArray=[]
+
+predictedData.result.forEach(function(predictedItem){
+categoryArray.push(predictedItem.product)
+countArray.push(parseInt(predictedItem.value))
+})
+//mainchart.series.data=countArray[Math.floor((Math.random() * 4) + 0)]
+mainchart.series[0].data=countArray;
+//mainchart.xAxis.categories=categoryArray[Math.floor((Math.random() * 4) + 0)]
+mainchart.xAxis.categories=categoryArray;
 Highcharts.chart('mainChart', mainchart);
-Highcharts.chart('RetailerChart', retailerCharts);
+//Highcharts.chart('RetailerChart', retailerCharts);
 });
-var retailerCharts = {
+    var retailerCharts = {
 
             chart: {
                 type: 'pie',
@@ -250,9 +528,7 @@ var retailerCharts = {
     },
     xAxis: {
         categories:[
-            'HARDWARE ACCESSORIES','BOX 18X12X13','BASE SINGLE DOOR',
-            'MOLDING PLANT 2','UV PANELS','AA BOX','BASE BASE DRAWER','SmlBox/Env/Vendor',
-            'BOX 14X12X6','RANGE ACCY'],
+            'HARDWARE ACCESSORIES'],
         crosshair: true,
         labels: {
                 rotation: -45,
@@ -279,31 +555,32 @@ var retailerCharts = {
             pointPadding: 0.2,
             borderWidth: 0
         },
-
-
-                point: {
-                    cursor: 'pointer',
-
-                    events: {
-                        click: function(e) {
-                            var clickedSeriesPoint = this.name
-                            retailerCharts.series.data=retailerArray[Math.floor((Math.random() * 3) + 0)]
-                            Highcharts.chart('RetailerChart', retailerCharts);
-
-                        },
-
-
-                    }
-                }
     },
     series: [{
         name: 'Demand Count',
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1],
+        data: [5],
         events: {
                         click: function(e) {
-                            var clickedSeriesPoint = this.name
-                            retailerCharts.series.data=[];
-                            retailerCharts.series.data=retailerArray[Math.floor((Math.random() * 3) + 0)]
+                            var clickedSeriesPoint = e.point.category;
+                            predictedData.products
+                            for (var key in predictedData.products) {
+                                if(key==clickedSeriesPoint)
+                                {
+                                var retailerArray=[]
+                                var item = predictedData.products[key];
+                                    for(var innerItem in item){
+                                        var temp={}
+                                        temp['name']=innerItem
+                                        temp['y']=parseInt(item[innerItem])
+                                        retailerArray.push(temp)
+                                    }
+                                    retailerArray[0]["sliced"]= true
+                                    retailerArray[0]["selected"]= true
+                                }
+                            }
+
+                            retailerCharts.series[0].data=[];
+                            retailerCharts.series[0].data=retailerArray;
                             Highcharts.chart('RetailerChart', retailerCharts);
 
                         },
@@ -318,120 +595,7 @@ var retailerCharts = {
     }
 
 
-    var dailyPredicition = {};
-
-    function roundTo(n, digits) {
-        if (digits === undefined) {
-            digits = 0;
-        }
-
-        var multiplicator = Math.pow(10, digits);
-        n = parseFloat((n * multiplicator).toFixed(11));
-        var test = (Math.round(n) / multiplicator);
-        return +(test.toFixed(digits));
-    }
-
-    function getBestFitCarrierList(fnCallback, fnUpdateCallback) {
-
-        var Result = {};
-        var totalTruckCount = 0;
-        var resultCount = 0;
-
-    }
-
-    charts = {chart: {}};
-
-    function drawChart(title, xText, yText, canvasId, previousData) {
-        drawChartx(title, xText, yText, canvasId, previousData, true);
-    }
-
-    function drawChart2(title, xText, yText, canvasId, previousData) {
-        drawChartx(title, xText, yText, canvasId, previousData, false);
-    }
-
-    function drawChartx(title, xText, yText, canvasId, previousData, maintainAspectRatio) {
-        if (!charts.chart || !charts.chart[title]) {
-
-
-            var config = {
-                type: 'line',
-                data: {
-                    labels: [],
-                    datasets: []
-                },
-                options: {
-
-                    maintainAspectRatio: maintainAspectRatio,
-                    legend: {
-                        fillStyle: '#000',
-                        labels: {
-                            fillStyle: '#000',
-                        }
-
-                    },
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: title
-                    },
-                    tooltips: {
-                        mode: 'index',
-                        intersect: false,
-                    },
-                    hover: {
-                        mode: 'nearest',
-                        intersect: true
-                    },
-                    scales: {
-                        xAxes: [{
-                            display: true,
-                            scaleLabel: {
-                                display: true,
-                                labelString: xText
-                            }
-                        }],
-                        yAxes: [{
-                            display: true,
-                            scaleLabel: {
-                                display: true,
-                                labelString: yText
-                            }
-                        }]
-                    }
-                }
-            };
-            var ctx = document.getElementById(canvasId).getContext("2d");
-            //ctx.style.backgroundColor = 'rgba(255,0,0,255)';
-            charts.chart[title] = new Chart(ctx, config);
-            // ctx.style.backgroundColor = 'rgba(255,0,0,255)';
-        }
-
-        charts.chart[title].data.labels = [];
-        charts.chart[title].data.datasets = [];
-
-        previousData.forEach(function (t, i) {
-            var line = {
-                label: (t.name + "").toUpperCase(),
-                backgroundColor: 'white',
-                borderColor: t.lineColor,
-                data: t.y,
-                pointRadius: 5,
-                fill: false
-            };
-
-
-            if (t.color)
-                line.pointBackgroundColor = t.color;
-
-            if (t.x && charts.chart[title].data.labels.length == 0)
-                charts.chart[title].data.labels = charts.chart[title].data.labels.concat(t.x);
-            charts.chart[title].data.datasets.push(line)
-        });
-        charts.chart[title].update();
-    }
-
-
-    loadLanes();
+    loadData();
 
 })
 ;
